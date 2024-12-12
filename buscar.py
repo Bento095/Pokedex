@@ -22,6 +22,10 @@ def escolhas_buscar():
         match opcao_escolhida:
             case 1:
                 nome()
+            case 2:
+                tipo()
+            case 3:
+                numero()
             case 4:
                 voltar_ao_menu()
             case 5:
@@ -32,7 +36,20 @@ def escolhas_buscar():
         buscar()
 
 def nome():
-    print("BUsca por nome")
+    print("busca por nome")
+    time.sleep(1)
+    buscar()
+
+def tipo():
+    print("busca por tipo")
+    time.sleep(1)
+    buscar()
+
+def numero():
+    print("busca por numero")
+    time.sleep(1)
+    buscar()
+
 
 def voltar_ao_menu():
     ''' Retorna ao menu'''
