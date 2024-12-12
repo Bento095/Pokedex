@@ -70,7 +70,7 @@ def exibir_subtitulo(texto):
 def finalizar_app():
     '''Encerra o app limpando a tela apoz uma mensagem de emcerramento'''
 
-    exibir_subtitulo('Fechando app')
+    exibir_subtitulo('Obrigado por testar! (◍ ˃̵͈̑ᴗ˂̵͈̑)')
     
 # Bloco principal do programa
 def main():
