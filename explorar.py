@@ -16,7 +16,7 @@ def explorar(): # responsavel pela arquitetura da funçao explorar
     opcoes_explorar()
     inicio = (pagina - 1) * linhas_por_pagina
     fim = min(inicio + linhas_por_pagina, len(df))
-    print(df[inicio:fim])
+    print(df[inicio:fim])           
     opcoes_explorar()
     dex()
     
