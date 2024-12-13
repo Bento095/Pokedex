@@ -2,17 +2,19 @@ import os
 import time
 import titulo
 import app
-
+import pandas as pd
 from app import *
+from sqlalchemy import create_engine, MetaData, Table, inspect
 
 def buscar():
-    os.system('cls')
     print('Buscar')
+    time.sleep(1)
+    os.system('cls')
+    titulo.titulo()
     opcoes_buscar()
     escolhas_buscar()
 
 def opcoes_buscar():
-    titulo.titulo()
     print("Buscar por: \n", '|1 - Nome|', '|2 - Tipo|', '|3 - Número|\n', '|4 - Menu|', '|5 - Sair|')
     
 
@@ -21,11 +23,11 @@ def escolhas_buscar():
         opcao_escolhida = int(input('Escolha uma opção: '))
         match opcao_escolhida:
             case 1:
-                nome()
+                busca_por_nome()
             case 2:
-                tipo()
+                busca_por_tipo()
             case 3:
-                numero()
+                busca_por_numero()
             case 4:
                 voltar_ao_menu()
             case 5:
@@ -35,17 +37,28 @@ def escolhas_buscar():
     except ValueError:
         buscar()
 
-def nome():
+def busca_por_nome():
     print("busca por nome")
-    time.sleep(1)
-    buscar()
-
-def tipo():
+    entrada = input("Digite o nome do pokemon: ")
+    nome = entrada.title()
+    engine = create_engine('sqlite:///:memory:')
+    app.df.to_sql('pkm', engine)
+    query = f"SELECT * FROM pkm WHERE Name='{nome}'"
+    df_nome = pd.read_sql(query, engine)
+    
+    os.system('cls')
+    titulo.titulo()
+    print('\n')
+    print(df_nome,'\n')
+    opcoes_buscar()
+    escolhas_buscar()
+    
+def busca_por_tipo():
     print("busca por tipo")
     time.sleep(1)
     buscar()
 
-def numero():
+def busca_por_numero():
     print("busca por numero")
     time.sleep(1)
     buscar()
