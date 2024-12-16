@@ -8,7 +8,7 @@ import titulo
 from explorar import *
 from buscar import *
 
-df = pd.read_csv(r'C:\Users\Shiryu EVA UNIT-GE\Documents\Pokedex\pkm.csv', index_col=False)
+df = pd.read_csv('RotomPyDex\pkm.csv', index_col=False)
 df.drop(df.columns[-1], axis=1, inplace=True)
 
 def exibir_opcoes():

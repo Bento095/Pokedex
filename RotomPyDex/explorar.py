@@ -2,9 +2,9 @@ import os
 import time
 import pandas as pd
 import titulo
-import app
+import main as main
 
-from app import df,exibir_opcoes,escolher_opcao
+from main import df,exibir_opcoes,escolher_opcao
 
 pagina = 1
 linhas_por_pagina=10
@@ -15,7 +15,7 @@ def explorar(): # responsavel pela arquitetura da funçao explorar
     titulo.titulo()
     opcoes_explorar()
     inicio = (pagina - 1) * linhas_por_pagina
-    fim = min(inicio + linhas_por_pagina, len(df))
+    fim = min(inicio + linhas_por_pagina, len(f'{df}'))
     print(df[inicio:fim])           
     opcoes_explorar()
     dex()
