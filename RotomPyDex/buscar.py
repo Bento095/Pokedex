@@ -1,7 +1,7 @@
 import os
 import time
 import titulo
-import main as main
+import main
 import pandas as pd
 
 from main import *
@@ -10,8 +10,6 @@ from explorar import *
 
 
 def buscar(): # responsavel pela estrutura da função
-    print('Buscar')
-    time.sleep(1)
     os.system('cls')
     titulo.titulo()
     opcoes_buscar()
@@ -20,7 +18,6 @@ def buscar(): # responsavel pela estrutura da função
 def opcoes_buscar(): # exibido para auxiliar a navegação
     print("Buscar por: \n", '|1 - Nome|', '|2 - Tipo|', '|3 - Número|\n', '|4 - Menu|', '|5 - Sair|')
     
-
 def escolhas_buscar(): #bloco principal da navegação, recebe o imput e executa o bloco respectivo
     try:
         opcao_escolhida = int(input('Escolha uma opção: '))
@@ -63,17 +60,29 @@ def busca_por_nome(): #funçâo vai receber um texto do usuario, tratar para ini
     except ValueError:
         busca_por_nome
     
-def busca_por_tipo(): # este foi chatinho e devera receber mais atenção guando o progeto receber uma GUI, deixando a navegação entre as paginas viaveis.
-    print("busca por tipo")
-    entrada = input("Digite o tipo do pokemon: ")
-    tipo = entrada.lower()
-    engine = create_engine('sqlite:///:memory:')
-    main.df.to_sql('pkm', engine)
-    query = f"SELECT * FROM pkm WHERE \"Type 1\" = '{tipo}' OR \"Type 2\" = '{tipo}'"
-    df = pd.read_sql(query, engine) 
-    print(df)
-    opcoes_buscar()
-    escolhas_buscar()
+def busca_por_tipo(): # este foi chatinho e devera receber mais atenção quando o projeto receber uma GUI, deixando a navegação entre as paginas viaveis.
+    try:
+        print("busca por tipo")
+        entrada = input("Digite o tipo do pokemon: ")
+        tipo = entrada.lower()
+        engine = create_engine('sqlite:///:memory:')
+        main.df.to_sql('pkm', engine)
+        query = f"SELECT * FROM pkm WHERE \"Type 1\" = '{tipo}' OR \"Type 2\" = '{tipo}'"
+        df_tipo = pd.read_sql(query, engine)
+        if tipo not in df_tipo['Type 1'].values and df_tipo['Type 2'].values or df_tipo.empty:
+            print("Tipo Pokémon não encontrado, tente de novo.")
+            time.sleep(1)
+            busca_por_tipo()
+        else:
+            os.system('cls')
+            titulo.titulo()
+            print('\n')
+            print(df_tipo)
+            opcoes_buscar()
+            escolhas_buscar()
+    except ValueError:
+        print('ValueError')
+        busca_por_tipo()
 
 def busca_por_numero():#aqui o codigo é bem parecido com o de busca_por_nome, mas tive erros por passar a coluna No. sem os colchetes, o tratamento com a entrada tbm so converte para inteiro ja que é esperado apenas nùmeros
     try:
