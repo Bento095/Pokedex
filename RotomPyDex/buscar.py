@@ -1,10 +1,10 @@
 import os
+import pandas as pd
 import time
 import titulo
 import main
-import pandas as pd
+import voltar as voltar
 
-from main import *
 from sqlalchemy import create_engine, MetaData, Table, inspect
 from explorar import *
 
@@ -29,12 +29,14 @@ def escolhas_buscar(): #bloco principal da navegação, recebe o imput e executa
             case 3:
                 busca_por_numero()
             case 4:
-                voltar_ao_menu()
+                voltar.voltar_ao_menu()
             case 5:
-                finalizar_app()
+                voltar.finalizar_app()
             case _:
+                main.opcao_invalida()
                 buscar()
     except ValueError:
+        main.opcao_invalida()
         buscar()
 
 def busca_por_nome(): #funçâo vai receber um texto do usuario, tratar para inicial maiuscula como no padrão doa dados e fazer uma busca criando um novo df, depois verificando se o texto inserido faz parte na coluna Name, caso contrario o bloco reinicia
@@ -58,6 +60,7 @@ def busca_por_nome(): #funçâo vai receber um texto do usuario, tratar para ini
             opcoes_buscar()
             escolhas_buscar()
     except ValueError:
+        main.opcao_invalida()
         busca_por_nome
     
 def busca_por_tipo(): # este foi chatinho e devera receber mais atenção quando o projeto receber uma GUI, deixando a navegação entre as paginas viaveis.
@@ -81,7 +84,7 @@ def busca_por_tipo(): # este foi chatinho e devera receber mais atenção quando
             opcoes_buscar()
             escolhas_buscar()
     except ValueError:
-        print('ValueError')
+        main.opcao_invalida()
         busca_por_tipo()
 
 def busca_por_numero():#aqui o codigo é bem parecido com o de busca_por_nome, mas tive erros por passar a coluna No. sem os colchetes, o tratamento com a entrada tbm so converte para inteiro ja que é esperado apenas nùmeros
@@ -105,31 +108,6 @@ def busca_por_numero():#aqui o codigo é bem parecido com o de busca_por_nome, m
             opcoes_buscar()
             escolhas_buscar()
     except ValueError:
+        main.opcao_invalida()
         busca_por_numero()
 
-def voltar_ao_menu(): # deve ir para um app separado no futuro
-    ''' Retorna ao menu'''
-    print('\nVoltando ao menu. ')
-    time.sleep(1)
-    os.system('cls')
-    titulo.titulo()
-    main.exibir_opcoes()
-    main.escolher_opcao()
-
-def exibir_subtitulo(texto):# deve ir para um app separado no futuro
-    '''Exibe uma linha de texto como subtitulo em destaque refente a opção escolhida.
-    
-    Input:
-    - texto: str - o texto do subtitulo'''
-
-    os.system('cls')
-    linha = '*' * (len(texto))
-    print(linha)
-    print(texto)
-    print(linha)
-    print()
-
-def finalizar_app():# deve ir para um app separado no futuro
-    '''Encerra o app limpando a tela apoz uma mensagem de emcerramento'''
-
-    exibir_subtitulo('Obrigado por testar! (◍ ˃̵͈̑ᴗ˂̵͈̑)')

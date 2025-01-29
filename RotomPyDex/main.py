@@ -4,9 +4,8 @@ import time
 import explorar
 import buscar
 import titulo
+import voltar as voltar
 
-from explorar import *
-from buscar import *
 
 df = pd.read_csv('RotomPyDex\pkm.csv', index_col=False)
 df.drop(df.columns[-1], axis=1, inplace=True)
@@ -17,13 +16,10 @@ def exibir_opcoes():
     print('3. Sair\n')
 
 def opcao_invalida():
-    '''Exibe uma mensagem de opção invalida e retorna ao menu ao clicar a proxima tecla.
-
-    Outputs:
-    - Retorna ao menu principal'''
+    '''Exibe uma mensagem de opção invalida e retorna ao menu ao clicar a proxima tecla.'''
 
     print('Opçao invalida\n')
-    voltar_ao_menu()
+    time.sleep(0.5)
 
 def escolher_opcao():
     '''Utiliza  o input escolhido para executar a função corespondente, incuindo opção invalida
@@ -37,40 +33,17 @@ def escolher_opcao():
             case 1:
                 explorar.explorar()
             case 2:
-                buscar()
+                buscar.buscar()
             case 3:
-                finalizar_app()
+                voltar.finalizar_app()
             case _:
-                opcao_invalida()
+                voltar.opcao_invalida()
+                voltar.voltar_ao_menu()
     except ValueError:
         opcao_invalida()
+        voltar.voltar_ao_menu()
 
-def voltar_ao_menu():
-    ''' Retorna ao menu'''
-    print('\nVoltando ao menu. ')
-    time.sleep(1)
-    os.system('cls')
-    titulo.titulo()
-    exibir_opcoes()
-    escolher_opcao()
 
-def exibir_subtitulo(texto):
-    '''Exibe uma linha de texto como subtitulo em destaque refente a opção escolhida.
-    
-    Input:
-    - texto: str - o texto do subtitulo'''
-
-    os.system('cls')
-    linha = '*' * (len(texto))
-    print(linha)
-    print(texto)
-    print(linha)
-    print()
-
-def finalizar_app():
-    '''Encerra o app limpando a tela apoz uma mensagem de emcerramento'''
-
-    exibir_subtitulo('Obrigado por testar! (◍ ˃̵͈̑ᴗ˂̵͈̑)')
     
 # Bloco principal do programa
 def main():

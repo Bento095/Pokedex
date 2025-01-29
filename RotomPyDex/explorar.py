@@ -1,10 +1,11 @@
 import os
-import time
 import pandas as pd
+import time
 import titulo
-import main as main
+import voltar as voltar
 
 from main import df,exibir_opcoes,escolher_opcao
+
 
 pagina = 1
 linhas_por_pagina=10
@@ -38,9 +39,9 @@ def dex():# responsavel por receber um input referente as opcoes_explorar e exec
             case 4:
                 ultima()
             case 5:
-                voltar_ao_menu()
+                voltar.voltar_ao_menu()
             case 6:
-                finalizar_app()
+                voltar.finalizar_app()
             case _:
                 explorar()
     except ValueError:
@@ -53,7 +54,7 @@ def proxima():
         explorar()
     else:
         print("\nVocê está na última página.")
-        time.sleep(1)
+        time.sleep(0.5)
         explorar()
         
 def anterior():
@@ -63,7 +64,7 @@ def anterior():
         explorar()
     else:
         print("\nVocê está na primeira página.")
-        time.sleep(1)
+        time.sleep(0.5)
         explorar()
         
 def primeira():
@@ -75,30 +76,3 @@ def ultima():
     global pagina
     pagina = total_paginas
     explorar()
-
-def voltar_ao_menu():
-    ''' Retorna ao menu'''
-    print('\nVoltando ao menu. ')
-    time.sleep(1)
-    os.system('cls')
-    titulo.titulo()
-    exibir_opcoes()
-    escolher_opcao()
-
-def exibir_subtitulo(texto):
-    '''Exibe uma linha de texto como subtitulo em destaque refente a opção escolhida.
-    
-    Input:
-    - texto: str - o texto do subtitulo'''
-
-    os.system('cls')
-    linha = '*' * (len(texto))
-    print(linha)
-    print(texto)
-    print(linha)
-    print()
-
-def finalizar_app():
-    '''Encerra o app limpando a tela apoz uma mensagem de emcerramento'''
-
-    exibir_subtitulo('Obrigado por testar! (◍ ˃̵͈̑ᴗ˂̵͈̑)')
