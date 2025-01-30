@@ -28,6 +28,6 @@ def exibir_subtitulo(texto):
     print()
 
 def finalizar_app():
-    '''Encerra o app limpando a tela apoz uma mensagem de encerramento'''
+    '''Encerra o app limpando a tela após uma mensagem de encerramento'''
 
     exibir_subtitulo('Obrigado por testar! ٩(^ᴗ^)۶')
